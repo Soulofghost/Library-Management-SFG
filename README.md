@@ -48,3 +48,7 @@ The repository includes a portable local runner. You do **not** need Java or Mav
 * **Student Profile**:
   * Username: `student`
   * Password: `student123`
+
+
+---
+**Developed by Soul of Ghost**

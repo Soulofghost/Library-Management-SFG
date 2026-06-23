@@ -26,11 +26,6 @@
     --border-radius: 4px;
 }
 
-/* DEC VT100 Amber theme override for OS theme toggler */
-[data-theme="dark"] {
-    --bg-desktop: #D75F00; /* Amber Desktop */
-    --color-blue: #D75F00; /* Primary color shifts to Amber */
-}
 
 /* Basic resets */
 body {
