@@ -1,51 +1,17 @@
-// Global Library Management UI Helper
+/**
+ * Global Library Management UI Helper
+ * Re-organized for modularity and smooth execution.
+ */
 
-function initApp() {
+// ==========================================
+// UTILITY FUNCTIONS
+// ==========================================
 
-
-    // 2. Mobile Sidebar Explorer toggle
-    const hamburgerBtn = document.getElementById("hamburger-btn");
-    const sidebar = document.getElementById("sidebar");
-    
-    if (hamburgerBtn && sidebar) {
-        hamburgerBtn.addEventListener("click", (e) => {
-            e.stopPropagation();
-            sidebar.classList.toggle("show");
-        });
-
-        // Click outside to close sidebar on mobile
-        document.addEventListener("click", (e) => {
-            if (sidebar.classList.contains("show") && !sidebar.contains(e.target) && e.target !== hamburgerBtn) {
-                sidebar.classList.remove("show");
-            }
-        });
-    }
-
-    // 3. Setup toast container
-    let toastContainer = document.getElementById("toast-container");
-    if (!toastContainer) {
-        toastContainer = document.createElement("div");
-        toastContainer.id = "toast-container";
-        toastContainer.style.position = "fixed";
-        toastContainer.style.bottom = "20px";
-        toastContainer.style.right = "20px";
-        toastContainer.style.zIndex = "9999";
-        toastContainer.style.display = "flex";
-        toastContainer.style.flexDirection = "column";
-        toastContainer.style.gap = "10px";
-        document.body.appendChild(toastContainer);
-    }
-}
-
-if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initApp);
-} else {
-    initApp();
-}
-
-
-
-// Global Toast dialog popups helper
+/**
+ * Global Toast dialog popups helper
+ * @param {string} message The message to display
+ * @param {string} type 'success' or 'error'
+ */
 function showToast(message, type = "success") {
     const container = document.getElementById("toast-container");
     if (!container) return;
@@ -69,4 +35,69 @@ function showToast(message, type = "success") {
             toast.remove();
         });
     }, 4000);
+}
+
+// ==========================================
+// UI SETUP FUNCTIONS
+// ==========================================
+
+/**
+ * Initializes the Toast container structure if it doesn't exist
+ */
+function setupToastContainer() {
+    let toastContainer = document.getElementById("toast-container");
+    if (!toastContainer) {
+        toastContainer = document.createElement("div");
+        toastContainer.id = "toast-container";
+        toastContainer.style.position = "fixed";
+        toastContainer.style.bottom = "20px";
+        toastContainer.style.right = "20px";
+        toastContainer.style.zIndex = "9999";
+        toastContainer.style.display = "flex";
+        toastContainer.style.flexDirection = "column";
+        toastContainer.style.gap = "10px";
+        document.body.appendChild(toastContainer);
+    }
+}
+
+/**
+ * Initializes the mobile sidebar toggle interactions
+ */
+function setupSidebar() {
+    const hamburgerBtn = document.getElementById("hamburger-btn");
+    const sidebar = document.getElementById("sidebar");
+    
+    if (hamburgerBtn && sidebar) {
+        // Toggle sidebar visibility on mobile
+        hamburgerBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            sidebar.classList.toggle("show");
+        });
+
+        // Click outside to close sidebar on mobile
+        document.addEventListener("click", (e) => {
+            if (sidebar.classList.contains("show") && !sidebar.contains(e.target) && e.target !== hamburgerBtn) {
+                sidebar.classList.remove("show");
+            }
+        });
+    }
+}
+
+// ==========================================
+// INITIALIZATION
+// ==========================================
+
+/**
+ * Main application entry point
+ */
+function initApp() {
+    setupToastContainer();
+    setupSidebar();
+}
+
+// Run initialization when DOM is fully loaded
+if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initApp);
+} else {
+    initApp();
 }
